@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdController;
+use App\Http\Controllers\PublicController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +28,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    // permet d'avoir /dashboard/ads par défaut
+    Route::prefix('/dashboard')->group(function () {
+        Route::resource('ads', AdController::class);
+    });
 });
+
+Route::get('/public', [PublicController::class, 'index'])->name('public');
+Route::get('/public/show/{id}', [PublicController::class, 'show'])->name('public');
 
 require __DIR__.'/auth.php';

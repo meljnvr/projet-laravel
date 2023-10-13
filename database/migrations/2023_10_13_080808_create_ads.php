@@ -19,15 +19,17 @@ return new class extends Migration
             $table->text('description');
             $table->float('price');
             $table->string('place');
-            $table->text('image')->nullable;
+            $table->text('image')->nullable();
             $table->string('state');
-            $table->string('brand')->nullable;
-            $table->integer('year')->nullable;
-            $table->string('dimensions')->nullable;
-            $table->date('expiration_date')->nullable;
-            $table->string('devlivery');
-            $table->text('garanties')->nullable;
+            $table->string('brand')->nullable();
+            $table->integer('year')->nullable();
+            $table->string('dimensions')->nullable();
+            $table->date('expiration_date')->nullable();
+            $table->string('delivery');
+            $table->text('garanties')->nullable();
             $table->boolean('open_to_discussion');
+            $table->unsignedBigInteger('author_id');
+            $table->foreign('author_id')->references('id')->on('users');
         });
     }
 
