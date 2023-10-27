@@ -9,9 +9,12 @@ class PublicController extends Controller
 {
     public function index(Request $request)
     {
-        if ($request->has('sort') && $request->sort == 'price') {
+        // trie les annonces
+        if ($request->has('sort') && $request->sort == 'increasing') {
             $ads = Ad::orderBy('price')->get();
-        } else {
+        } else if ($request->has('sort') && $request->sort == 'decreasing') {
+            $ads = Ad::orderBy('price', 'desc')->get();
+        }else {
             $ads = Ad::all();
         }
         return view('public.index', ['ads' => $ads]);

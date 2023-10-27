@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
+        // Création de 10 annonces
+
         \App\Models\Ad::factory(10)->create();
     }
 }

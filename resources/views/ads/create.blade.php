@@ -19,17 +19,6 @@
             <input type="checkbox" id="open_to_discussion" name="open_to_discussion" />
             <label for="open_to_discussion">Open to discussion</label>
         </div>
-        {{ $errors }}
         <button type="submit">Enregistrer</button>
-        <!-- {{$errors}}
-        @error('name', 'description', 'date', 'status')
-            <div class="alert alert-danger">{{ $message }}</div>
-        @enderror -->
     </form>
 </x-app-layout>
-
-            $table->string('dimensions')->nullable;
-            $table->date('expiration_date')->nullable;
-            $table->string('delivery');
-            $table->text('garanties')->nullable;
-            $table->boolean('open_to_discussion');

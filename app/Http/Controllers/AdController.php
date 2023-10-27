@@ -15,9 +15,12 @@ class AdController extends Controller
 {
     public function index(Request $request)
     {
-        if ($request->has('sort') && $request->sort == 'price') {
+        // trie les annonces
+        if ($request->has('sort') && $request->sort == 'increasing') {
             $ads = Ad::orderBy('price')->get();
-        } else {
+        } else if ($request->has('sort') && $request->sort == 'decreasing') {
+            $ads = Ad::orderBy('price', 'desc')->get();
+        }else {
             $ads = Ad::all();
         }
         return view('ads.index', ['ads' => $ads]);
@@ -39,12 +42,15 @@ class AdController extends Controller
     {
         $req = $request->all();
         $req['author_id'] = Auth::user()->id;
-        //conversion de la checkbox en boolean
+        // conversion de la checkbox en boolean
         $req['open_to_discussion'] = $request->has('open_to_discussion');
         
+        // ajoute les images
         $ad = Ad::create($req);if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
+                // store les images dans public
                 $imagePath = $image->store('uploads','public');
+                // créé l'image dans la bdd
                 AdImage::create([
                     'ad_id' => $ad->id,
                     'file_path' => $imagePath,
@@ -85,9 +91,9 @@ class AdController extends Controller
             foreach ($request->file('update_images') as $imageId => $imageData) {
                 $image = AdImage::find($imageId);
                 if (isset($imageData["'img_update'" ]) ) {
-                    $file = $imageData["'img_update'" ];
-                    $path = $file->store('uploads','public');
-                    Storage::delete($image->file_path); // Supprimer l'ancienne image
+                    $file = $imageData["'img_update'" ]; // remplace le chemin de l'ancienne image par le nouveau dans la bdd
+                    $path = $file->store('uploads','public'); // enregistre la nouvelle image
+                    Storage::delete($image->file_path); // supprime l'ancienne image
                     $image->update(['file_path' => $path]);
                 }
             }
@@ -128,6 +134,7 @@ class AdController extends Controller
         // possibilité de delete seulement si l'annonce appartient au user connecté ou admin
         $this->authorize('delete', $ad);
 
+        // supprime les images liées dans la bdd
         foreach ($ad->images as $image) {
         Storage::disk('public')->delete($image->img_url);
         $image->delete();

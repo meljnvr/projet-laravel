@@ -1,8 +1,8 @@
 <x-app-layout>
 
     <form method="GET" action="/dashboard/ads">
-        <x-primary-button type="submit" name="sort" value="price">Sort by price</x-primary-button>
-        <x-primary-button type="submit" name="sort" value="">Reset</x-primary-button>
+        <x-primary-button type="submit" name="sort" value="increasing">Prix : par ordre croissant</x-primary-button>
+        <x-primary-button type="submit" name="sort" value="decreasing">Prix : par ordre décroissant</x-primary-button>
     </form>
 
     @foreach($ads as $ad)
