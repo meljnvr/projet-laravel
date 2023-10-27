@@ -6,7 +6,8 @@
         <input type="text" name="category" placeholder="category" id="category" required>
         <input type="text" name="price" placeholder="price" id="price" required>€
         <input type="text" name="place" placeholder="place" id="place" required>
-        <input type="text" name="image" placeholder="image" id="image" required>
+        <label for="file">Image</label>
+        <input type="file" name="images[]" multiple>
         <input type="text" name="state" placeholder="state" id="state" required>
         <input type="text" name="brand" placeholder="brand" id="brand">
         <input type="text" name="year" placeholder="year" id="year">

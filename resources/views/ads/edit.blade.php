@@ -8,7 +8,15 @@
         <input type="text" name="category" placeholder="category" id="category" required value="{{$ad->category}}">
         <input type="text" name="price" placeholder="price" id="price" required value="{{$ad->price}}">€
         <input type="text" name="place" placeholder="place" id="place" required value="{{$ad->place}}">
-        <input type="text" name="image" placeholder="image" id="image" required value="{{$ad->image}}">
+
+        @foreach ($ad->images as $image)
+            <img style="width:150px;" src="{{ asset('storage/' . $image->file_path) }}" target="_blank">
+            <input type="file" name="update_images[{{ $image->id }}]['img_update']" accept="image/*">
+            <input type="checkbox" name="delete_images[{{ $image->id }}]"> Supprimer
+        @endforeach
+        <input type="file" name="new_images[]" multiple>
+        {{ $errors }}
+        
         <input type="text" name="state" placeholder="state" id="state" required value="{{$ad->state}}">
         <input type="text" name="brand" placeholder="brand" id="brand" value="{{$ad->brand}}">
         <input type="text" name="year" placeholder="year" id="year" value="{{$ad->year}}">
@@ -16,6 +24,7 @@
         <input type="text" name="delivery" placeholder="delivery" id="delivery" required value="{{$ad->delivery}}">
         <input type="date" name="expiration_date" id="expiration_date" value="{{$ad->expiration_date}}">
         <input type="text" name="garanties" placeholder="garanties" id="garanties" value="{{$ad->garanties}}">
+        
         <div>
         <input type="checkbox" id="open_to_discussion" name="open_to_discussion" value="1" @if($ad->open_to_discussion) checked @endif>
             <label for="open_to_discussion">Open to discussion</label>
