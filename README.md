@@ -13,10 +13,13 @@ avec Interface d'Administration sur Laravel
     * npm install
     * npm run dev
 
-3. Lancer le serveur  
-    * php artisan serve 
+3. Créer une clé unique 
+    * php artisan key:generate
 
-4. Créer une BDD  
+4. Lancer le serveur  
+    * php artisan serve
+
+5. Créer une BDD  
     * dans le .env, renseigner le nom de la bdd : DB_DATABASE= (nom)
     * lancer les migrations : php artisan migrate 
 
