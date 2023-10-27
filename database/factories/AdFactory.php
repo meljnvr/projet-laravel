@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\AdImage;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -19,18 +20,17 @@ class AdFactory extends Factory
     {
         return [
             'title' => fake()->words(rand(1, 3), true),
-            'description' => fake()->sentences,
+            'description' => fake()->sentence,
             'category' => fake()->word,
             'price' => fake()->randomFloat,
             'place' => fake()->city,
-            'image' => fake()->imageUrl,
             'state' => fake()->word,
             'brand' => fake()->word,
             'year' => fake()->year,
             'dimensions' => fake()->sentence,
             'expiration_date' => fake()->date,
             'delivery' => fake()->word,
-            'garanties' => fake()->sentences,
+            'garanties' => fake()->sentence,
             'open_to_discussion' => fake()->boolean,
             'author_id' => User::all()->random()->id,
         ];

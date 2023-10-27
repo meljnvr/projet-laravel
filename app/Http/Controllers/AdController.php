@@ -13,9 +13,13 @@ use Illuminate\Support\Facades\Storage;
 
 class AdController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $ads = Ad::all();
+        if ($request->has('sort') && $request->sort == 'price') {
+            $ads = Ad::orderBy('price')->get();
+        } else {
+            $ads = Ad::all();
+        }
         return view('ads.index', ['ads' => $ads]);
         
     }
